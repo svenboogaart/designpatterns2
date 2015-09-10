@@ -1,0 +1,13 @@
+C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\bin\Debug\GameDP2.exe.config
+C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\bin\Debug\GameDP2.exe
+C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\bin\Debug\GameDP2.pdb
+C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\obj\Debug\GameDP2.csprojResolveAssemblyReference.cache
+C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\obj\Debug\MainWindow.baml
+C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\obj\Debug\MainWindow.g.cs
+C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\obj\Debug\App.g.cs
+C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\obj\Debug\GameDP2_MarkupCompile.cache
+C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\obj\Debug\GameDP2.g.resources
+C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\obj\Debug\GameDP2.Properties.Resources.resources
+C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\obj\Debug\GameDP2.csproj.GenerateResource.Cache
+C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\obj\Debug\GameDP2.exe
+C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\obj\Debug\GameDP2.pdb
