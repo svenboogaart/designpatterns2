@@ -13,7 +13,7 @@ namespace Compiler
             input = input.Replace(System.Environment.NewLine, "");
             Console.WriteLine("TOKENIZE");
             Console.WriteLine();
-            string[] words = input.Split(new string[] { "einde" }, StringSplitOptions.None);
+            string[] words = input.Split(new string[] { "einde", "begincode", "eindcode"}, StringSplitOptions.None);
             foreach (string word in words)
             {
 
