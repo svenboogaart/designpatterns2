@@ -11,3 +11,6 @@ C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\obj\Debug\GameDP2
 C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\obj\Debug\GameDP2.csproj.GenerateResource.Cache
 C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\obj\Debug\GameDP2.exe
 C:\Users\Sven\Documents\GitHub\Design-Patterns\GameDP2\GameDP2\obj\Debug\GameDP2.pdb
+C:\Users\Sven\Documents\school\designpatterns\GameDP2\GameDP2\bin\Debug\GameDP2.exe.config
+C:\Users\Sven\Documents\school\designpatterns\GameDP2\GameDP2\obj\Debug\GameDP2.exe
+C:\Users\Sven\Documents\school\designpatterns\GameDP2\GameDP2\obj\Debug\GameDP2.pdb
