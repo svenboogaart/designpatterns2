@@ -8,9 +8,13 @@ als	haakjeopen x is 3 haakjesluiten
 begincode
 	x wordt 2 einde
 eindcode
-anders
+andersals
 begincode
 	x wordt 4 einde
+eindcode
+anders
+begincode
+	x wordt 5 einde
 eindcode
 zolang haakjeopen x groterdan 4 haakjesluiten
 begincode
