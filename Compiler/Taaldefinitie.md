@@ -23,8 +23,3 @@ begincode
 	z wordt x plus y einde
 eindcode
 toon haakjeopen x haakjesluiten einde
-
-plus
-min
-delendoor
-keer
