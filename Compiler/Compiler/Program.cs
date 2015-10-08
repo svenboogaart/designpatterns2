@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Compiler.Tokenizer;
 
 namespace Compiler
 {
@@ -19,8 +20,8 @@ namespace Compiler
             try
             {
                 string textFromFile = System.IO.File.ReadAllText(@fileName);
-                Tokenizer tokenizer = new Tokenizer();
-                tokenizer.Tokenize(textFromFile);
+                Tokenize tokenizer = new Tokenize();
+                tokenizer.Tokenizer(textFromFile);
                 
             }
             catch (Exception e)
