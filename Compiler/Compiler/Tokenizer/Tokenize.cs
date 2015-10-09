@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Compiler.Utility;
+using System.IO;
 
 namespace Compiler.Tokenizer
 {
@@ -12,76 +13,86 @@ namespace Compiler.Tokenizer
         CustomLinkedList<Token> tokens;
         public CustomLinkedList<Token> Tokenizer(String input)
         {
+            Console.WriteLine(input);
+            int level = 1;
+            int line = 1;
             tokens = new CustomLinkedList<Token>();
-            input = input.Replace(System.Environment.NewLine, " ");
-            string[] parts = input.Split(new string[] { " " }, StringSplitOptions.None);
-            foreach (string part in parts)
+            Stack<Token> partnerStack = new Stack<Token>();
+            using (StringReader reader = new StringReader(input))
             {
-                checkToken(part.Trim());
+                string sline;
+                while ((sline = reader.ReadLine()) != null)
+                {
+                    line++;
+                    string[] parts = sline.Split(new string[] { " " }, StringSplitOptions.None);
+                    foreach (string part in parts)
+                    {
+                        TokenType type = checkToken(part.Trim());
+                        Token token = new Token();
+                        if (type == TokenType.BracketsClose || type == TokenType.EndCode)
+                        {
+                            level--;
+                            Token partner = partnerStack.Pop();
+                            partner.Partner = token;
+                            token.Partner = partner;
+                        }
+
+                        token.TokenType = type;
+                        token.Value = part.Trim();
+                        token.Level = level;
+                        token.LineNumber = line;
+                        token.Position = sline.IndexOf(part);
+                        tokens.InsertLast(token);
+
+                        if (type == TokenType.BracketsOpen || type == TokenType.StartCode)
+                        {
+                            level++;
+                            partnerStack.Push(token);
+                        }
+
+                    }
+                }
             }
-            return null;
+
+            return tokens;
         }
 
-        public void checkToken(String token)
+        public TokenType checkToken(String token)
         {
             switch (token)
             {
                 case "begincode":
-                    tokens.InsertLast(new Token(TokenType.BracketsOpen,token));
-                    Console.WriteLine(token + " " + TokenType.BracketsOpen);
-                    break;
+                    return TokenType.StartCode;
                 case "eindcode":
-                    tokens.InsertLast(new Token(TokenType.BracketsClose, token));
-                    Console.WriteLine(token + " " + TokenType.BracketsClose);
-                    break;
+                    return TokenType.EndCode;
                 case "als":
-                    tokens.InsertLast(new Token(TokenType.IfToken, token));
-                    Console.WriteLine(token + " " + TokenType.IfToken);
-                    break;
+                    return TokenType.IfToken;
                 case "andersals":
-                    tokens.InsertLast(new Token(TokenType.IfelseToken, token));
-                    Console.WriteLine(token + " " + TokenType.IfelseToken);
-                    break;
+                    return TokenType.IfelseToken;
                 case "anders":
-                    tokens.InsertLast(new Token(TokenType.ElseToken, token));
-                    Console.WriteLine(token + " " + TokenType.ElseToken);
-                    break;
+                    return TokenType.ElseToken;
                 case "woord":
-                    tokens.InsertLast(new Token(TokenType.TypeString, token));
-                    Console.WriteLine(token + " " + TokenType.TypeString);
-                    break;
+                    return TokenType.TypeString;
                 case "getal":
-                    tokens.InsertLast(new Token(TokenType.TypeNumber, token));
-                    Console.WriteLine(token + " " + TokenType.TypeNumber);
-                    break;
+                    return TokenType.TypeNumber;
                 case "letter":
-                    tokens.InsertLast(new Token(TokenType.TypeChar, token));
-                    Console.WriteLine(token + " " + TokenType.TypeChar);
-                    break;
+                    return TokenType.TypeChar;
                 case "wordt":
-                    tokens.InsertLast(new Token(TokenType.Equals, token));
-                    Console.WriteLine(token + " " + TokenType.Equals);
-                    break;
+                    return TokenType.Equals;
                 case "is":
-                    tokens.InsertLast(new Token(TokenType.EqualsEquals, token));
-                    Console.WriteLine(token + " " + TokenType.EqualsEquals);
-                    break;
+                    return TokenType.EqualsEquals;
                 case "verhogen":
-                    tokens.InsertLast(new Token(TokenType.Increment, token));
-                    Console.WriteLine(token + " " + TokenType.Increment);
-                    break;
+                    return TokenType.Increment;
                 case "verlagen":
-                    tokens.InsertLast(new Token(TokenType.Decrement, token));
-                    Console.WriteLine(token + " " + TokenType.Decrement);
-                    break;
+                    return TokenType.Decrement;
                 case "einde":
-                    tokens.InsertLast(new Token(TokenType.EndStatement, token));
-                    Console.WriteLine(token + " " + TokenType.EndStatement);
-                    break;
+                    return TokenType.EndStatement;
+                case "haakjeopen":
+                    return TokenType.BracketsOpen;
+                case "haakjesluiten":
+                    return TokenType.BracketsClose;
                 default:
-                    tokens.InsertLast(new Token(CheckType(token), token));
-                    Console.WriteLine(token + " " + CheckType(token));
-                    break;
+                    return CheckType(token);
             }
         }
 
@@ -94,7 +105,7 @@ namespace Compiler.Tokenizer
             }
             if (input.Length == 1)
             {
-                if (input[0] < '0' || input[0] > '9')
+                if (Char.IsDigit(input,0))
                 {
                     return TokenType.Number;
                 }

@@ -9,14 +9,17 @@ namespace Compiler.Tokenizer
 {
     public class Token
     {
-        public Token(TokenType type,string value)
+        public Token()
         {
-            TokenType = type;
+
         }      
 
-        TokenType TokenType { get; set; }
-        string Value { get; set; }
-        CustomLLNode<Token> partner { get; set; }
+        public TokenType TokenType { get; set; }
+        public string Value { get; set; }
+        public Token Partner { get; set; }
+        public int Level { get; set; }
+        public int LineNumber { get; set; }
+        public int Position { get; set; }
     }
 
     public enum TokenType
@@ -40,6 +43,8 @@ namespace Compiler.Tokenizer
         EqualsEquals,
         Increment,
         Decrement,
-        Empty
+        Empty,
+        EndCode,
+        StartCode
     }
 }
