@@ -42,16 +42,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Compiler\Compiler.cs" />
+    <Compile Include="Nodes\AbstractFunctionCall.cs" />
+    <Compile Include="Nodes\ConditionalJump.cs" />
+    <Compile Include="Nodes\DirectFunctionCall.cs" />
+    <Compile Include="Nodes\DoNothing.cs" />
+    <Compile Include="Nodes\FunctionCall.cs" />
+    <Compile Include="Nodes\Jump.cs" />
+    <Compile Include="Nodes\Node.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tokenizer\Token.cs" />
     <Compile Include="Tokenizer\Tokenize.cs" />
     <Compile Include="Utility\CustomLLNode.cs" />
     <Compile Include="Utility\CustomLinkedList.cs" />
-    <Compile Include="VirtualMachine\RunNode.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="VirtualMachine\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

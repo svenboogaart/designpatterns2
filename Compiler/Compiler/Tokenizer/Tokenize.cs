@@ -11,13 +11,17 @@ namespace Compiler.Tokenizer
     public class Tokenize
     {
         CustomLinkedList<Token> tokens;
+        Dictionary<string, TokenType> tokenDictionairy;
+        Stack<Token> partnerStack;
+
         public CustomLinkedList<Token> Tokenizer(String input)
         {
+            fillDictionairy();
             Console.WriteLine(input);
             int level = 1;
             int line = 1;
             tokens = new CustomLinkedList<Token>();
-            Stack<Token> partnerStack = new Stack<Token>();
+            partnerStack = new Stack<Token>();
             using (StringReader reader = new StringReader(input))
             {
                 string sline;
@@ -27,7 +31,17 @@ namespace Compiler.Tokenizer
                     string[] parts = sline.Split(new string[] { " " }, StringSplitOptions.None);
                     foreach (string part in parts)
                     {
-                        TokenType type = checkToken(part.Trim());
+                        Token token = new Token(part,level,line,sline.IndexOf(part));
+                        if (tokens.Last == null || tokens.Last.Value.TokenType == TokenType.EndStatement)
+                        {
+                            token = NewLoneToken(token);
+                        }
+                        else if (tokens.Last.Value.TokenType == TokenType.TypeNumber || tokens.Last.Value.TokenType == TokenType.TypeChar || tokens.Last.Value.TokenType == TokenType.TypeString)
+                        {
+                            token.TokenType = TokenType.Identifier;
+                        }
+
+                        /*TokenType type = checkToken(part.Trim());
                         Token token = new Token();
                         if (type == TokenType.BracketsClose || type == TokenType.EndCode)
                         {
@@ -48,8 +62,8 @@ namespace Compiler.Tokenizer
                         {
                             level++;
                             partnerStack.Push(token);
-                        }
-
+                        }*/
+                        tokens.InsertLast(token);
                     }
                 }
             }
@@ -57,42 +71,54 @@ namespace Compiler.Tokenizer
             return tokens;
         }
 
-        public TokenType checkToken(String token)
+        public Token NewLoneToken(Token token)
         {
-            switch (token)
+            TokenType type = checkToken(token.Value);
+            /*if (type == TokenType.BracketsClose || type == TokenType.EndCode)
             {
-                case "begincode":
-                    return TokenType.StartCode;
-                case "eindcode":
-                    return TokenType.EndCode;
-                case "als":
-                    return TokenType.IfToken;
-                case "andersals":
-                    return TokenType.IfelseToken;
-                case "anders":
-                    return TokenType.ElseToken;
-                case "woord":
-                    return TokenType.TypeString;
-                case "getal":
-                    return TokenType.TypeNumber;
-                case "letter":
-                    return TokenType.TypeChar;
-                case "wordt":
-                    return TokenType.Equals;
-                case "is":
-                    return TokenType.EqualsEquals;
-                case "verhogen":
-                    return TokenType.Increment;
-                case "verlagen":
-                    return TokenType.Decrement;
-                case "einde":
-                    return TokenType.EndStatement;
-                case "haakjeopen":
-                    return TokenType.BracketsOpen;
-                case "haakjesluiten":
-                    return TokenType.BracketsClose;
-                default:
-                    return CheckType(token);
+                //level--;
+                Token partner = partnerStack.Pop();
+                partner.Partner = token;
+                token.Partner = partner;
+            }*/
+            token.TokenType = type;
+            /*if (type == TokenType.BracketsOpen || type == TokenType.StartCode)
+            {
+                level++;
+                partnerStack.Push(token);
+            }*/
+            return token;
+        }
+
+        public void fillDictionairy()
+        {
+            tokenDictionairy = new Dictionary<string, TokenType>();
+            tokenDictionairy.Add("begincode", TokenType.StartCode);
+            tokenDictionairy.Add("eindcode", TokenType.EndCode);
+            tokenDictionairy.Add("als", TokenType.IfToken);
+            tokenDictionairy.Add("andersals", TokenType.IfelseToken);
+            tokenDictionairy.Add("anders", TokenType.ElseToken);
+            tokenDictionairy.Add("woord", TokenType.TypeString);
+            tokenDictionairy.Add("getal", TokenType.TypeNumber);
+            tokenDictionairy.Add("letter", TokenType.TypeChar);
+            tokenDictionairy.Add("wordt", TokenType.Equals);
+            tokenDictionairy.Add("is", TokenType.EqualsEquals);
+            tokenDictionairy.Add("verhogen", TokenType.Increment);
+            tokenDictionairy.Add("verlagen", TokenType.Decrement);
+            tokenDictionairy.Add("einde", TokenType.EndStatement);
+            tokenDictionairy.Add("haakjeopen", TokenType.BracketsOpen);
+            tokenDictionairy.Add("haakjesluiten", TokenType.BracketsClose);
+        }
+
+        public TokenType checkToken(string token)
+        {
+            if (tokenDictionairy.ContainsKey(token))
+            {
+                return tokenDictionairy[token];
+            }
+            else
+            {
+                return CheckType(token);
             }
         }
 

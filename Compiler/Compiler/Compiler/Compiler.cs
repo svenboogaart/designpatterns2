@@ -1,6 +1,5 @@
 ﻿using Compiler.Tokenizer;
 using Compiler.Utility;
-using Compiler.VirtualMachine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +17,11 @@ namespace Compiler.Compiler
             return current;
         }
 
-        public abstract void Compile(CustomLinkedList<Token> tokenList
+        /*public abstract void Compile(CustomLinkedList<Token> tokenList
                                 , CustomLLNode<Token> begin
                                 , CustomLLNode<Token> end
                                 , CustomLinkedList<RunNode> runList
-                                , CustomLLNode<RunNode> before);
+                                , CustomLLNode<RunNode> before);*/
         
         protected static string GetNextLocalVariableName()
         {

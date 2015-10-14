@@ -9,9 +9,12 @@ namespace Compiler.Tokenizer
 {
     public class Token
     {
-        public Token()
+        public Token(string value, int level, int lineNumber, int position)
         {
-
+            Value = value;
+            Level = level;
+            LineNumber = lineNumber;
+            Position = position;
         }      
 
         public TokenType TokenType { get; set; }
@@ -20,6 +23,11 @@ namespace Compiler.Tokenizer
         public int Level { get; set; }
         public int LineNumber { get; set; }
         public int Position { get; set; }
+
+        public void Print()
+        {
+            Console.WriteLine(TokenType.ToString() + " " + Value);
+        }
     }
 
     public enum TokenType
