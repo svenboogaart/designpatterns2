@@ -30,7 +30,7 @@ namespace Compiler.Tokenizer
                     line++;
                     string[] parts = sline.Split(new string[] { " " }, StringSplitOptions.None);
                     foreach (string part in parts)
-                    {
+                    {                        
                         Token token = new Token(part,level,line,sline.IndexOf(part));
                         if (tokens.Last == null || tokens.Last.Value.TokenType == TokenType.EndStatement)
                         {
@@ -40,7 +40,10 @@ namespace Compiler.Tokenizer
                         {
                             token.TokenType = TokenType.Identifier;
                         }
-
+                        else
+                        {
+                            token = NewLoneToken(token);
+                        }                        
                         /*TokenType type = checkToken(part.Trim());
                         Token token = new Token();
                         if (type == TokenType.BracketsClose || type == TokenType.EndCode)

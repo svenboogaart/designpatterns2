@@ -24,14 +24,11 @@ namespace Compiler.Tokenizer
         public int LineNumber { get; set; }
         public int Position { get; set; }
 
-        public void Print()
-        {
-            Console.WriteLine(TokenType.ToString() + " " + Value);
-        }
     }
 
     public enum TokenType
     {
+        NoTokenType,
         Identifier,
         TypeNumber, //= getal
         TypeString, //= woord

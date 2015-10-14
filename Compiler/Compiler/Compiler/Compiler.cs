@@ -10,22 +10,10 @@ namespace Compiler.Compiler
 {
     public abstract class Compiler
     {
-        private static int localCounter = 0;
+        public abstract void Compile(LinkedListNode<Token> currentToken);
 
-        public CustomLLNode<Token> GetLastNode(CustomLinkedList<Token> tokenList, CustomLLNode<Token> current)
-        {
-            return current;
-        }
+        public abstract void Clone();
 
-        /*public abstract void Compile(CustomLinkedList<Token> tokenList
-                                , CustomLLNode<Token> begin
-                                , CustomLLNode<Token> end
-                                , CustomLinkedList<RunNode> runList
-                                , CustomLLNode<RunNode> before);*/
-        
-        protected static string GetNextLocalVariableName()
-        {
-            return " " + (++localCounter);
-        }
+        public abstract bool IsMatch(LinkedListNode<Token> currentToken);
     }
 }

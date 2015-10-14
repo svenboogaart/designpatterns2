@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Compiler\CompileAssignment.cs" />
+    <Compile Include="Compiler\CompileStatement.cs" />
     <Compile Include="Compiler\Compiler.cs" />
     <Compile Include="Nodes\AbstractFunctionCall.cs" />
     <Compile Include="Nodes\ConditionalJump.cs" />

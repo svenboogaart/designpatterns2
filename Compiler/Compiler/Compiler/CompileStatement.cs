@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Compiler.Nodes
+namespace Compiler.Compiler
 {
-    public class Jump : Node
+    public class CompileStatement : Compiler
     {
-
     }
 }

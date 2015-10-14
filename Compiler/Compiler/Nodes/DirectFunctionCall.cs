@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Compiler.Nodes
 {
-    public class DirectFunctionCall : Node
+    public class DirectFunctionCall : AbstractFunctionCall
     {
+
     }
 }

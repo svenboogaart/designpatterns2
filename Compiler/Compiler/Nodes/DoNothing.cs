@@ -8,5 +8,6 @@ namespace Compiler.Nodes
 {
     public class DoNothing : Node
     {
+
     }
 }
