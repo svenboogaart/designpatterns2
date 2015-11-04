@@ -8,6 +8,9 @@ namespace Compiler.Nodes
 {
     public abstract class AbstractFunctionCall : Node
     {
- 
+        public override void Accept(VirtualMachine.NodeVisitor visitor)
+        {
+
+        }
     }
 }

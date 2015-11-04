@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Compiler.Tokenizer;
+using Compiler.Utility;
+using Compiler.Compiler;
 
 namespace Compiler
 {
@@ -28,7 +30,9 @@ namespace Compiler
                 Console.WriteLine(e.Message);
             }
             Tokenize tokenizer = new Tokenize();
-            tokenizer.Tokenizer(textFromFile);   
+            CustomLinkedList<Token> tokens = tokenizer.Tokenizer(textFromFile);
+
+            Compile.compile(tokens);
 
             Console.WriteLine("Press any key to exit.");
             System.Console.ReadKey();

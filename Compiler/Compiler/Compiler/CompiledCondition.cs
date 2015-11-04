@@ -1,0 +1,60 @@
+﻿using Compiler.Nodes;
+using Compiler.Tokenizer;
+using Compiler.Utility;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Compiler.Compiler
+{
+    public class CompiledCondition : CompiledStatement
+    {
+        public override CustomLinkedList<Nodes.Node> Compile(ref CustomLLNode<Token> currentToken)
+        {
+            Token leftToken = currentToken.Value;
+            string leftName = leftToken.Value;
+            currentToken = currentToken.Next;
+            Token operatorToken = currentToken.Value;
+            currentToken = currentToken.Next;
+            Token rightToken = currentToken.Value;
+            string rightName = rightToken.Value;
+
+            if (leftToken.TokenType != TokenType.Identifier)
+            {
+                //leftName = base.GetNextUniqueId();
+                Compiled.InsertLast(new DirectFunctionCall("ConstantToReturn", leftToken.Value));
+                Compiled.InsertLast(new DirectFunctionCall("ReturnToVariable", leftName));
+            }
+            if (rightToken.TokenType != TokenType.Identifier)
+            {
+                //rightName = base.GetNextUniqueId();
+                Compiled.InsertLast(new DirectFunctionCall("ConstantToReturn", rightToken.Value));
+                Compiled.InsertLast(new DirectFunctionCall("ReturnToVariable", rightName));
+            }
+            // ... hetzelfde voor rightname
+
+            switch (operatorToken.TokenType)
+            {
+                case TokenType.EqualsEquals: 
+                    Compiled.InsertLast(new FunctionCall("AreEqual", leftName, rightName));
+                    break;
+                // etc.
+                default:
+                    break;
+            }
+            return Compiled;
+        }
+
+        public override CompiledStatement clone()
+        {
+            return new CompiledCondition();
+        }
+
+        public override bool isMatch(CustomLLNode<Token> token)
+        {
+            return token.Next.Value.TokenType == TokenType.EqualsEquals;
+        }
+    }
+}

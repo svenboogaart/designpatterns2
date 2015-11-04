@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Compiler.Compiler
+namespace Compiler.VirtualMachine
 {
-    public class CompileStatement : Compiler
+    public class NodeVisitor
     {
+        
     }
 }

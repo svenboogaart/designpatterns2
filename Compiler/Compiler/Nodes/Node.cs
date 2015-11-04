@@ -1,4 +1,5 @@
 ﻿using Compiler.Utility;
+using Compiler.VirtualMachine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace Compiler.Nodes
 {
-    public interface Node
+    public abstract class Node
     {
-
+        public abstract void Accept(NodeVisitor visitor);
     }
 }

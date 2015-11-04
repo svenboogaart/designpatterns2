@@ -9,5 +9,9 @@ namespace Compiler.Nodes
     public class DoNothing : Node
     {
 
+        public override void Accept(VirtualMachine.NodeVisitor visitor)
+        {
+            
+        }
     }
 }

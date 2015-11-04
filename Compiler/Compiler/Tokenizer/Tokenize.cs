@@ -10,18 +10,17 @@ namespace Compiler.Tokenizer
 {
     public class Tokenize
     {
+        public static int level = 1;
+
         CustomLinkedList<Token> tokens;
-        Dictionary<string, TokenType> tokenDictionairy;
-        Stack<Token> partnerStack;
+        TokenFactory tokenFactory;
 
         public CustomLinkedList<Token> Tokenizer(String input)
         {
-            fillDictionairy();
+            tokenFactory = new TokenFactory();
             Console.WriteLine(input);
-            int level = 1;
             int line = 1;
             tokens = new CustomLinkedList<Token>();
-            partnerStack = new Stack<Token>();
             using (StringReader reader = new StringReader(input))
             {
                 string sline;
@@ -30,8 +29,16 @@ namespace Compiler.Tokenizer
                     line++;
                     string[] parts = sline.Split(new string[] { " " }, StringSplitOptions.None);
                     foreach (string part in parts)
-                    {                        
-                        Token token = new Token(part,level,line,sline.IndexOf(part));
+                    {
+                        Token token;
+                        if (tokens.Last != null)
+                            token = tokenFactory.Create(part, tokens.Last.Value);
+                        else
+                            token = tokenFactory.Create(part, null);
+                            
+                            
+                            
+                        /*new Token(part,level,line,sline.IndexOf(part));
                         if (tokens.Last == null || tokens.Last.Value.TokenType == TokenType.EndStatement)
                         {
                             token = NewLoneToken(token);
@@ -74,7 +81,7 @@ namespace Compiler.Tokenizer
             return tokens;
         }
 
-        public Token NewLoneToken(Token token)
+        /*public Token NewLoneToken(Token token)
         {
             TokenType type = checkToken(token.Value);
             /*if (type == TokenType.BracketsClose || type == TokenType.EndCode)
@@ -83,49 +90,17 @@ namespace Compiler.Tokenizer
                 Token partner = partnerStack.Pop();
                 partner.Partner = token;
                 token.Partner = partner;
-            }*/
+            }
             token.TokenType = type;
             /*if (type == TokenType.BracketsOpen || type == TokenType.StartCode)
             {
                 level++;
                 partnerStack.Push(token);
-            }*/
+            }
             return token;
         }
 
-        public void fillDictionairy()
-        {
-            tokenDictionairy = new Dictionary<string, TokenType>();
-            tokenDictionairy.Add("begincode", TokenType.StartCode);
-            tokenDictionairy.Add("eindcode", TokenType.EndCode);
-            tokenDictionairy.Add("als", TokenType.IfToken);
-            tokenDictionairy.Add("andersals", TokenType.IfelseToken);
-            tokenDictionairy.Add("anders", TokenType.ElseToken);
-            tokenDictionairy.Add("woord", TokenType.TypeString);
-            tokenDictionairy.Add("getal", TokenType.TypeNumber);
-            tokenDictionairy.Add("letter", TokenType.TypeChar);
-            tokenDictionairy.Add("wordt", TokenType.Equals);
-            tokenDictionairy.Add("is", TokenType.EqualsEquals);
-            tokenDictionairy.Add("verhogen", TokenType.Increment);
-            tokenDictionairy.Add("verlagen", TokenType.Decrement);
-            tokenDictionairy.Add("einde", TokenType.EndStatement);
-            tokenDictionairy.Add("haakjeopen", TokenType.BracketsOpen);
-            tokenDictionairy.Add("haakjesluiten", TokenType.BracketsClose);
-        }
-
-        public TokenType checkToken(string token)
-        {
-            if (tokenDictionairy.ContainsKey(token))
-            {
-                return tokenDictionairy[token];
-            }
-            else
-            {
-                return CheckType(token);
-            }
-        }
-
-        public TokenType CheckType(string input)
+        /*public TokenType CheckType(string input)
         {
             if (input.Length == 0)
             {
@@ -151,6 +126,6 @@ namespace Compiler.Tokenizer
                 }
             }
             return TokenType.Number;
-        }
+        }*/
     }
 }

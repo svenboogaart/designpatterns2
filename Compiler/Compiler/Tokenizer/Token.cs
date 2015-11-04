@@ -9,6 +9,11 @@ namespace Compiler.Tokenizer
 {
     public class Token
     {
+        public Token()
+        {
+
+        }
+
         public Token(string value, int level, int lineNumber, int position)
         {
             Value = value;

@@ -57,6 +57,25 @@ namespace Compiler.Utility
             return node;
         }
 
+        public CustomLLNode<T> InsertList(CustomLinkedList<T> list)
+        {
+            count += list.Count;
+
+            if (first == null)
+            {
+                this.first = list.First;
+                this.last = list.Last;
+            }
+            else
+            {
+                this.last.Next = list.First;
+                list.First.Previous = this.last;
+                this.last = list.Last;
+            }
+
+            return last;
+        }
+
         public CustomLLNode<T> InsertBefore(CustomLLNode<T> right, T value)
         {
             if (right == null)
