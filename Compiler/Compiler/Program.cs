@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Compiler.Tokenizer;
-using Compiler.Utility;
 using Compiler.Compiler;
 
 namespace Compiler
@@ -30,7 +29,7 @@ namespace Compiler
                 Console.WriteLine(e.Message);
             }
             Tokenize tokenizer = new Tokenize();
-            CustomLinkedList<Token> tokens = tokenizer.Tokenizer(textFromFile);
+            LinkedList<Token> tokens = tokenizer.Tokenizer(textFromFile);
 
             Compile.compile(tokens);
 

@@ -8,6 +8,7 @@ namespace Compiler.Nodes
 {
     public class Jump : Node
     {
+        public Node JumpTo { get; set; }
         public override void Accept(VirtualMachine.NodeVisitor visitor)
         {
 

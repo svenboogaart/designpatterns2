@@ -1,5 +1,4 @@
 ﻿using Compiler.Tokenizer;
-using Compiler.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +30,7 @@ namespace Compiler.Compiler
             compilers.Add(new CompiledDeclaration());
         }
 
-        public CompiledStatement CreateCompiledStatement(CustomLLNode<Token> currentToken)
+        public CompiledStatement CreateCompiledStatement(LinkedListNode<Token> currentToken)
         {
             foreach(CompiledStatement compiledStatement in compilers)
             {

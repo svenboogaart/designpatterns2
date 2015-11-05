@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Compiler.Nodes;
+using Compiler.Tokenizer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +10,7 @@ namespace Compiler.Compiler
 {
     public class CompiledIf : CompiledStatement
     {
-        public override Utility.CustomLinkedList<Nodes.Node> Compile(ref Utility.CustomLLNode<Tokenizer.Token> currentToken)
+        public override NodeLinkedList Compile(ref LinkedListNode<Token> currentToken)
         {
             throw new NotImplementedException();
         }
@@ -18,7 +20,7 @@ namespace Compiler.Compiler
             throw new NotImplementedException();
         }
 
-        public override bool isMatch(Utility.CustomLLNode<Tokenizer.Token> token)
+        public override bool isMatch(LinkedListNode<Token> token)
         {
             throw new NotImplementedException();
         }

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Compiler.Utility;
 using Compiler.Nodes;
 
 namespace Compiler.Compiler
@@ -12,7 +11,7 @@ namespace Compiler.Compiler
     public class CompiledAssignment : CompiledStatement
     {
 
-        public override CustomLinkedList<Node> Compile(ref CustomLLNode<Token> currentToken)
+        public override NodeLinkedList Compile(ref LinkedListNode<Token> currentToken)
         {
             var variableName = currentToken.Value.Value;
             
@@ -20,7 +19,7 @@ namespace Compiler.Compiler
             //var rightCompiled = CompilerFactory.Instance.CreateCompiledStatement(currentToken);
 
             //this.Compiled.InsertLastList(rightCompiled.Compiled);
-            this.Compiled.InsertLast(new DirectFunctionCall("ReturnToVariable", variableName));
+            this.Compiled.Add(new DirectFunctionCall("ReturnToVariable", variableName));
 
             currentToken = currentToken.Next.Next;
             return Compiled;
@@ -31,7 +30,7 @@ namespace Compiler.Compiler
             return new CompiledAssignment();
         }
 
-        public override bool isMatch(CustomLLNode<Token> token)
+        public override bool isMatch(LinkedListNode<Token> token)
         {
             return token.Value.TokenType == TokenType.Identifier && token.Next.Value.TokenType == TokenType.Equals;
         }

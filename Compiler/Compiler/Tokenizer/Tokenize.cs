@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Compiler.Utility;
 using System.IO;
 
 namespace Compiler.Tokenizer
@@ -12,15 +11,15 @@ namespace Compiler.Tokenizer
     {
         public static int level = 1;
 
-        CustomLinkedList<Token> tokens;
+        LinkedList<Token> tokens;
         TokenFactory tokenFactory;
 
-        public CustomLinkedList<Token> Tokenizer(String input)
+        public LinkedList<Token> Tokenizer(String input)
         {
             tokenFactory = new TokenFactory();
             Console.WriteLine(input);
             int line = 1;
-            tokens = new CustomLinkedList<Token>();
+            tokens = new LinkedList<Token>();
             using (StringReader reader = new StringReader(input))
             {
                 string sline;
@@ -32,9 +31,13 @@ namespace Compiler.Tokenizer
                     {
                         Token token;
                         if (tokens.Last != null)
+                        {
                             token = tokenFactory.Create(part, tokens.Last.Value);
+                        }
                         else
+                        {
                             token = tokenFactory.Create(part, null);
+                        }
                             
                             
                             
@@ -73,7 +76,7 @@ namespace Compiler.Tokenizer
                             level++;
                             partnerStack.Push(token);
                         }*/
-                        tokens.InsertLast(token);
+                        tokens.AddLast(token);
                     }
                 }
             }

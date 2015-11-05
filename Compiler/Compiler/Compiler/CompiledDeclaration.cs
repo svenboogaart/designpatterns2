@@ -1,4 +1,5 @@
-﻿using Compiler.Tokenizer;
+﻿using Compiler.Nodes;
+using Compiler.Tokenizer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Compiler.Compiler
 {
     public class CompiledDeclaration : CompiledStatement
     {
-        public override Utility.CustomLinkedList<Nodes.Node> Compile(ref Utility.CustomLLNode<Tokenizer.Token> currentToken)
+        public override NodeLinkedList Compile(ref LinkedListNode<Token> currentToken)
         {
             currentToken = currentToken.Next;
             return Compiled;
@@ -20,7 +21,7 @@ namespace Compiler.Compiler
             return new CompiledDeclaration();
         }
 
-        public override bool isMatch(Utility.CustomLLNode<Tokenizer.Token> token)
+        public override bool isMatch(LinkedListNode<Token> token)
         {
             return (token.Value.TokenType == TokenType.TypeNumber || token.Value.TokenType == TokenType.TypeChar || token.Value.TokenType == TokenType.TypeString) && token.Next.Value.TokenType == TokenType.Identifier;
         }
