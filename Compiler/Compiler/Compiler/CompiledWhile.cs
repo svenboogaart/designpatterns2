@@ -10,28 +10,29 @@ namespace Compiler.Compiler
 {
     public class CompiledWhile : CompiledStatement
     {
+        private NodeLinkedList _compiledStatement;
         private NodeLinkedList _condition;
         private NodeLinkedList _body;
 
         public CompiledWhile()
         {
-            Compiled = new NodeLinkedList();
+            _compiledStatement = new NodeLinkedList();
             _condition = new NodeLinkedList();
             _body = new NodeLinkedList();
 
             var conditionalJumpNode = new ConditionalJump();
             var jumpBackNode = new Jump();
 
-            Compiled.Add(_condition);
-            Compiled.Add(conditionalJumpNode);
-            Compiled.Add(_body);
-            Compiled.Add(jumpBackNode);
+            _compiledStatement.Add(_condition);
+            _compiledStatement.Add(conditionalJumpNode);
+            _compiledStatement.Add(_body);
+            _compiledStatement.Add(jumpBackNode);
 
-            jumpBackNode.JumpTo = Compiled.First; 
-            conditionalJumpNode.JumpOnTrue = _body.First; 
-            conditionalJumpNode.JumpOnFalse = Compiled.Last;
+            jumpBackNode.JumpTo = _compiledStatement.First; 
+            conditionalJumpNode.JumpOnTrue = _body.First;
+            conditionalJumpNode.JumpOnFalse = _compiledStatement.Last;
         }
-        public override NodeLinkedList Compile(ref LinkedListNode<Token> currentToken)
+        public override NodeLinkedList Compile(ref LinkedListNode<Token> currentToken, NodeLinkedList compiled)
         {
             int whileLevel = currentToken.Value.Level;
 
@@ -64,22 +65,22 @@ namespace Compiler.Compiler
                     if (_condition == null) 
                     {
                         var compiledCondition = new CompiledCondition();
-                        compiledCondition.Compile(ref currentToken);
-                        _condition.Add(compiledCondition.Compiled);
+                        
+                        _condition = compiledCondition.Compile(ref currentToken,_condition);
                     }
                     else
                     {
                         while (currentToken.Value.Level > whileLevel) 
                         {
                             var compiledBodyPart = CompilerFactory.Instance.CreateCompiledStatement(currentToken);
-                            compiledBodyPart.Compile(ref currentToken);
-                            _body.Add(compiledBodyPart.Compiled);
+                            
+                            _body = compiledBodyPart.Compile(ref currentToken,_body);
                         };
                     }
                 }
             }
-
-            return Compiled;
+            Console.WriteLine("while");
+            return compiled;
         }
 
         public override CompiledStatement clone()
@@ -89,7 +90,7 @@ namespace Compiler.Compiler
 
         public override bool isMatch(LinkedListNode<Token> token)
         {
-            return token.Value.TokenType == TokenType.IfToken;
+            return token.Value.TokenType == TokenType.WhileToken;
         }
     }
 

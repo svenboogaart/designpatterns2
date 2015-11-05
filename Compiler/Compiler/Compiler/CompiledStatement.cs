@@ -10,19 +10,17 @@ namespace Compiler.Compiler
 {
     public abstract class CompiledStatement
     {
-        public NodeLinkedList Compiled;
 
         public CompiledStatement()
         {
-            Compiled = new NodeLinkedList();
         }
 
-        public abstract NodeLinkedList Compile(ref LinkedListNode<Token> currentToken);
+        public abstract NodeLinkedList Compile(ref LinkedListNode<Token> currentToken, NodeLinkedList compiled);
 
-        public Node GetLastNode()
+        /*public Node GetLastNode()
         {
             return Compiled.Last;
-        }
+        }*/
 
         public abstract CompiledStatement clone();
         public abstract bool isMatch(LinkedListNode<Token> token);

@@ -23,6 +23,7 @@ namespace Compiler.Tokenizer.Strategies
                 token.TokenType = TokenType.StartCode;
                 token.Value = value;
                 token.Level = Tokenize.level;
+                Tokenize.level++;
                 partnerStack.Push(token);
             }
             else if (value == "eindcode")
@@ -45,7 +46,7 @@ namespace Compiler.Tokenizer.Strategies
                 Tokenize.level++;
                 partnerStack.Push(token);
             }
-            else if (value == "haakjessluiten")
+            else if (value == "haakjesluiten")
             {
                 token = new Token();
                 Tokenize.level--;

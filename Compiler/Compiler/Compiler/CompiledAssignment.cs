@@ -11,17 +11,13 @@ namespace Compiler.Compiler
     public class CompiledAssignment : CompiledStatement
     {
 
-        public override NodeLinkedList Compile(ref LinkedListNode<Token> currentToken)
+        public override NodeLinkedList Compile(ref LinkedListNode<Token> currentToken, NodeLinkedList compiled)
         {
             var variableName = currentToken.Value.Value;
-
-            //var rightCompiled = CompilerFactory.Instance.CreateCompiledStatement(currentToken);
-
-            //this.Compiled.Add(rightCompiled.Compiled);
-            this.Compiled.Add(new DirectFunctionCall("ReturnToVariable", variableName));
-
             currentToken = currentToken.Next.Next;
-            return Compiled;
+            compiled.Add(new DirectFunctionCall("ReturnToVariable", variableName));   
+            Console.WriteLine("assign");
+            return compiled;
         }
 
         public override CompiledStatement clone()

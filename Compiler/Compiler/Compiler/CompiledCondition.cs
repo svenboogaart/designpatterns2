@@ -10,7 +10,7 @@ namespace Compiler.Compiler
 {
     public class CompiledCondition : CompiledStatement
     {
-        public override NodeLinkedList Compile(ref LinkedListNode<Token> currentToken)
+        public override NodeLinkedList Compile(ref LinkedListNode<Token> currentToken, NodeLinkedList compiled)
         {
             Token leftToken = currentToken.Value;
             string leftName = leftToken.Value;
@@ -23,38 +23,40 @@ namespace Compiler.Compiler
             if (leftToken.TokenType != TokenType.Identifier)
             {
                 leftName = getUniqueId();
-                Compiled.Add(new DirectFunctionCall("ConstantToReturn", leftToken.Value));
-                Compiled.Add(new DirectFunctionCall("ReturnToVariable", leftName));
+                compiled.Add(new DirectFunctionCall("ConstantToReturn", leftToken.Value));
+                compiled.Add(new DirectFunctionCall("ReturnToVariable", leftName));
             }
             else
             {
                 leftName = getUniqueId();
-                Compiled.Add(new DirectFunctionCall("IdentifierToReturn", leftToken.Value));
-                Compiled.Add(new DirectFunctionCall("ReturnToVariable", leftName));
+                compiled.Add(new DirectFunctionCall("ConstantToReturn", leftToken.Value));
+                compiled.Add(new DirectFunctionCall("ReturnToVariable", leftName));
             }
             if (rightToken.TokenType != TokenType.Identifier)
             {
                 rightName = getUniqueId();
-                Compiled.Add(new DirectFunctionCall("ConstantToReturn", rightToken.Value));
-                Compiled.Add(new DirectFunctionCall("ReturnToVariable", rightName));
+                compiled.Add(new DirectFunctionCall("ConstantToReturn", rightToken.Value));
+                compiled.Add(new DirectFunctionCall("ReturnToVariable", rightName));
             }
             else
             {
                 rightName = getUniqueId();
-                Compiled.Add(new DirectFunctionCall("IdentifierToReturn", rightToken.Value));
-                Compiled.Add(new DirectFunctionCall("ReturnToVariable", rightName));
+                compiled.Add(new DirectFunctionCall("ConstantToReturn", rightToken.Value));
+                compiled.Add(new DirectFunctionCall("ReturnToVariable", rightName));
             }
 
             switch (operatorToken.TokenType)
             {
-                case TokenType.EqualsEquals: 
-                    Compiled.Add(new FunctionCall("AreEqual", leftName, rightName));
+                case TokenType.EqualsEquals:
+                    compiled.Add(new FunctionCall("AreEqual", leftName, rightName));
                     break;
                 // etc.
                 default:
                     break;
             }
-            return Compiled;
+            currentToken = currentToken.Next;
+            Console.WriteLine("condition");
+            return compiled;
         }
 
         public override CompiledStatement clone()

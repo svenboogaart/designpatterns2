@@ -15,11 +15,12 @@ namespace Compiler.Compiler
         public static void compile(LinkedList<Token> list)
         {
             LinkedListNode<Token> currentToken = list.First;
+            CompiledNodes = new NodeLinkedList();
             //firstToken = firstToken.Next;
             while (currentToken != list.Last)
             {
                 CompiledStatement cs = CompilerFactory.Instance.CreateCompiledStatement(currentToken);
-                CompiledNodes = cs.Compile(ref currentToken);
+                CompiledNodes = cs.Compile(ref currentToken , CompiledNodes);
             }
 
             Node node = CompiledNodes.First;

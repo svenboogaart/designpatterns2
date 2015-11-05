@@ -10,26 +10,32 @@ namespace Compiler.Compiler
 {
     public class CompiledIf : CompiledStatement
     {
+        private NodeLinkedList _compiledStatement;
         private NodeLinkedList _condition;
         private NodeLinkedList _body;
 
-        public CompiledIf():base()
+        public CompiledIf()
         {
+            _compiledStatement = new NodeLinkedList();
             _condition = new NodeLinkedList();
             _body = new NodeLinkedList();
 
             var conditionalJumpNode = new ConditionalJump();
+            var jumpBackNode = new Jump();
 
-            Compiled.Add(_condition);
-            Compiled.Add(conditionalJumpNode);
-            Compiled.Add(_body);
+            _compiledStatement.Add(_condition);
+            _compiledStatement.Add(conditionalJumpNode);
+            _compiledStatement.Add(_body);
+            _compiledStatement.Add(jumpBackNode);
 
-            conditionalJumpNode.JumpOnTrue = _body.First; 
-            conditionalJumpNode.JumpOnFalse = Compiled.Last;
+            jumpBackNode.JumpTo = _compiledStatement.First; 
+            conditionalJumpNode.JumpOnTrue = _body.First;
+            conditionalJumpNode.JumpOnFalse = _compiledStatement.Last;
         }
-        public override NodeLinkedList Compile(ref LinkedListNode<Token> currentToken)
+        public override NodeLinkedList Compile(ref LinkedListNode<Token> currentToken, NodeLinkedList compiled)
         {
             int ifLevel = currentToken.Value.Level;
+            compiled.Add(_compiledStatement);
 
             List<TokenExpectation> expected = new List<TokenExpectation>()
             {
@@ -52,7 +58,8 @@ namespace Compiler.Compiler
                     }
                     else
                     {
-                        currentToken = currentToken.Next;
+                        if (currentToken.Next != null)
+                            currentToken = currentToken.Next;
                     }
                 }
                 else if (expectation.Level >= ifLevel)
@@ -60,22 +67,22 @@ namespace Compiler.Compiler
                     if (_condition == null) 
                     {
                         var compiledCondition = new CompiledCondition();
-                        compiledCondition.Compile(ref currentToken);
-                        _condition.Add(compiledCondition.Compiled);
+                        
+                        _condition = compiledCondition.Compile(ref currentToken, _condition);
                     }
                     else
                     {
                         while (currentToken.Value.Level > ifLevel) 
                         {
                             var compiledBodyPart = CompilerFactory.Instance.CreateCompiledStatement(currentToken);
-                            compiledBodyPart.Compile(ref currentToken);
-                            _body.Add(compiledBodyPart.Compiled);
+                            
+                            _body = compiledBodyPart.Compile(ref currentToken, _body);
                         };
                     }
                 }
             }
-
-            return Compiled;
+            Console.WriteLine("if");
+            return compiled;
         }
 
         public override CompiledStatement clone()

@@ -10,10 +10,10 @@ namespace Compiler.Compiler
 {
     public class CompiledDeclaration : CompiledStatement
     {
-        public override NodeLinkedList Compile(ref LinkedListNode<Token> currentToken)
+        public override NodeLinkedList Compile(ref LinkedListNode<Token> currentToken, NodeLinkedList compiled)
         {
             currentToken = currentToken.Next;
-            return Compiled;
+            return compiled;
         }
 
         public override CompiledStatement clone()

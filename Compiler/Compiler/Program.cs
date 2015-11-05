@@ -15,7 +15,7 @@ namespace Compiler
         {
 
             string fileName = Console.ReadLine();
-            string textFromFile = "getal x wordt 3 einde";
+            string textFromFile = "getal x wordt 3 einde als haakjeopen x isgelijkaan 3 haakjesluiten begincode x wordt 2 einde eindcode";
             if (fileName.Equals(""))
                 fileName = "C:\\CompilerText.txt";
 

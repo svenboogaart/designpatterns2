@@ -8,12 +8,9 @@ namespace Compiler.Nodes
 {
     public class DirectFunctionCall : AbstractFunctionCall
     {
-        private string name;
-        private string value;
-
+        
         public DirectFunctionCall(string name, string value) {
-            this.name = name;
-            this.value = value;
+            parameters = new string[2] { name, value };
         }
         public override void Accept(VirtualMachine.NodeVisitor visitor)
         {

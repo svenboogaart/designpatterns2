@@ -43,7 +43,9 @@
   <ItemGroup>
     <Compile Include="Compiler\CompiledAssignment.cs" />
     <Compile Include="Compiler\CompiledCondition.cs" />
+    <Compile Include="Compiler\CompiledConstant.cs" />
     <Compile Include="Compiler\CompiledDeclaration.cs" />
+    <Compile Include="Compiler\CompiledEndStatement.cs" />
     <Compile Include="Compiler\CompiledIf.cs" />
     <Compile Include="Compiler\CompiledPlus.cs" />
     <Compile Include="Compiler\CompiledStatement.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tokenizer\Strategies\AssignToken.cs" />
     <Compile Include="Tokenizer\Strategies\CodeBlockToken.cs" />
+    <Compile Include="Tokenizer\Strategies\ConditionToken.cs" />
     <Compile Include="Tokenizer\Strategies\EndstatementToken.cs" />
     <Compile Include="Tokenizer\Strategies\IfToken.cs" />
     <Compile Include="Tokenizer\Strategies\NumberToken.cs" />
