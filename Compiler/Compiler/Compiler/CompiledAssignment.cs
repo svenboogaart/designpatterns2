@@ -14,11 +14,10 @@ namespace Compiler.Compiler
         public override NodeLinkedList Compile(ref LinkedListNode<Token> currentToken)
         {
             var variableName = currentToken.Value.Value;
-            
 
             //var rightCompiled = CompilerFactory.Instance.CreateCompiledStatement(currentToken);
 
-            //this.Compiled.InsertLastList(rightCompiled.Compiled);
+            //this.Compiled.Add(rightCompiled.Compiled);
             this.Compiled.Add(new DirectFunctionCall("ReturnToVariable", variableName));
 
             currentToken = currentToken.Next.Next;

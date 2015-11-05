@@ -22,13 +22,10 @@ namespace Compiler.Compiler
             var conditionalJumpNode = new ConditionalJump();
             var jumpBackNode = new Jump();
 
-            Compiled.Add(new DoNothing());
             Compiled.Add(_condition);
             Compiled.Add(conditionalJumpNode);
             Compiled.Add(_body);
             Compiled.Add(jumpBackNode);
-            Compiled.Add(new DoNothing());
-
 
             jumpBackNode.JumpTo = Compiled.First; 
             conditionalJumpNode.JumpOnTrue = _body.First; 
@@ -92,7 +89,7 @@ namespace Compiler.Compiler
 
         public override bool isMatch(LinkedListNode<Token> token)
         {
-            return token.Value.TokenType == TokenType.WhileToken;
+            return token.Value.TokenType == TokenType.IfToken;
         }
     }
 

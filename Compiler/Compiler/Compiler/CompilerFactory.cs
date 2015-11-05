@@ -28,6 +28,10 @@ namespace Compiler.Compiler
             compilers = new List<CompiledStatement>();
             compilers.Add(new CompiledAssignment());
             compilers.Add(new CompiledDeclaration());
+            compilers.Add(new CompiledWhile());
+            compilers.Add(new CompiledIf());
+            compilers.Add(new CompiledCondition());
+
         }
 
         public CompiledStatement CreateCompiledStatement(LinkedListNode<Token> currentToken)
@@ -39,6 +43,7 @@ namespace Compiler.Compiler
                     return compiledStatement.clone();
                 }
             }
+            
             throw new Exception();
         }
     }

@@ -22,17 +22,28 @@ namespace Compiler.Compiler
 
             if (leftToken.TokenType != TokenType.Identifier)
             {
-                //leftName = base.GetNextUniqueId();
+                leftName = getUniqueId();
                 Compiled.Add(new DirectFunctionCall("ConstantToReturn", leftToken.Value));
+                Compiled.Add(new DirectFunctionCall("ReturnToVariable", leftName));
+            }
+            else
+            {
+                leftName = getUniqueId();
+                Compiled.Add(new DirectFunctionCall("IdentifierToReturn", leftToken.Value));
                 Compiled.Add(new DirectFunctionCall("ReturnToVariable", leftName));
             }
             if (rightToken.TokenType != TokenType.Identifier)
             {
-                //rightName = base.GetNextUniqueId();
+                rightName = getUniqueId();
                 Compiled.Add(new DirectFunctionCall("ConstantToReturn", rightToken.Value));
                 Compiled.Add(new DirectFunctionCall("ReturnToVariable", rightName));
             }
-            // ... hetzelfde voor rightname
+            else
+            {
+                rightName = getUniqueId();
+                Compiled.Add(new DirectFunctionCall("IdentifierToReturn", rightToken.Value));
+                Compiled.Add(new DirectFunctionCall("ReturnToVariable", rightName));
+            }
 
             switch (operatorToken.TokenType)
             {

@@ -20,7 +20,7 @@ namespace Compiler.Compiler
             {
                 CompiledStatement cs = CompilerFactory.Instance.CreateCompiledStatement(currentToken);
                 CompiledNodes = cs.Compile(ref currentToken);
-            }    
+            }
 
             Node node = CompiledNodes.First;
             while(node != null)
