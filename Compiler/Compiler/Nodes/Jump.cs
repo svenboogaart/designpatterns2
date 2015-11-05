@@ -11,7 +11,7 @@ namespace Compiler.Nodes
         public Node JumpTo { get; set; }
         public override void Accept(VirtualMachine.NodeVisitor visitor)
         {
-
+            visitor.Visit(this);
         }
     }
 }
