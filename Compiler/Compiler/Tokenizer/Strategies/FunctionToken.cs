@@ -14,7 +14,7 @@ namespace Compiler.Tokenizer.Strategies
             if (value == "print")
             {
                 token = new Token();
-                token.TokenType = TokenType.EndStatement;
+                token.TokenType = TokenType.Print;
                 token.Value = value;
                 token.Level = Tokenize.level;
             }
