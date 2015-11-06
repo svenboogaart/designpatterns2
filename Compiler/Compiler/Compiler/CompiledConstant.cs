@@ -14,9 +14,8 @@ namespace Compiler.Compiler
         public override Nodes.NodeLinkedList Compile(ref LinkedListNode<Token> currentToken, NodeLinkedList compiled)
         {
             compiled.Add(new DirectFunctionCall("ConstantToReturn", currentToken.Value.Value));
-
+            compiled.Add(new DirectFunctionCall("ReturnToVariable", getUniqueId()));
             currentToken = currentToken.Next;
-            Console.WriteLine("constant");
             return compiled;
         }
 

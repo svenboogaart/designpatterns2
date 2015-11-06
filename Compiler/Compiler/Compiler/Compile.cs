@@ -16,7 +16,6 @@ namespace Compiler.Compiler
         {
             LinkedListNode<Token> currentToken = list.First;
             CompiledNodes = new NodeLinkedList();
-            CompiledNodes.Add(new DoNothing());
             //firstToken = firstToken.Next;
             while (currentToken != list.Last)
             {

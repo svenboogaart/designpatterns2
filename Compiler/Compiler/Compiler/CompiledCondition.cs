@@ -26,19 +26,7 @@ namespace Compiler.Compiler
                 compiled.Add(new DirectFunctionCall("ConstantToReturn", leftToken.Value));
                 compiled.Add(new DirectFunctionCall("ReturnToVariable", leftName));
             }
-            else
-            {
-                leftName = getUniqueId();
-                compiled.Add(new DirectFunctionCall("ConstantToReturn", leftToken.Value));
-                compiled.Add(new DirectFunctionCall("ReturnToVariable", leftName));
-            }
             if (rightToken.TokenType != TokenType.Identifier)
-            {
-                rightName = getUniqueId();
-                compiled.Add(new DirectFunctionCall("ConstantToReturn", rightToken.Value));
-                compiled.Add(new DirectFunctionCall("ReturnToVariable", rightName));
-            }
-            else
             {
                 rightName = getUniqueId();
                 compiled.Add(new DirectFunctionCall("ConstantToReturn", rightToken.Value));
@@ -48,7 +36,7 @@ namespace Compiler.Compiler
             switch (operatorToken.TokenType)
             {
                 case TokenType.EqualsEquals:
-                    compiled.Add(new FunctionCall("AreEqual", leftName, rightName));
+                    compiled.Add(new FunctionCall("IsIs", leftName, rightName));
                     break;
                 // etc.
                 default:

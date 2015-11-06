@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Compiler.VirtualMachine.Commands
+namespace Compiler.VirtualMachine.Command
 {
     class ReturnToVariableCommand : BaseCommand
     {

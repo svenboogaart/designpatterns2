@@ -12,7 +12,7 @@ namespace Compiler.Nodes
         public Node JumpOnTrue { get; set; }
         public override void Accept(VirtualMachine.NodeVisitor visitor)
         {
-
+            visitor.Visit(this);
         }
     }
 }

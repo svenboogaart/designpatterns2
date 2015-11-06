@@ -19,6 +19,7 @@ namespace Compiler.Tokenizer
             tokenStrategy.Add(new IfWhileToken());
             tokenStrategy.Add(new NumberToken());
             tokenStrategy.Add(new ConditionToken());
+            tokenStrategy.Add(new PlusMinusToken());
             tokenStrategy.Add(new FunctionToken());
             tokenStrategy.Add(new TypeToken());
             tokenStrategy.Add(new IdentifierToken()); // moet de laatste zijn

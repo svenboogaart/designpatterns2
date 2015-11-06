@@ -15,8 +15,12 @@ namespace Compiler.Compiler
         {
             var variableName = currentToken.Value.Value;
             currentToken = currentToken.Next.Next;
+
+            CompiledStatement rightCompiled = CompilerFactory.Instance.CreateCompiledStatement(currentToken);
+            compiled = rightCompiled.Compile(ref currentToken,compiled);
+
+
             compiled.Add(new DirectFunctionCall("ReturnToVariable", variableName));   
-            Console.WriteLine("assign");
             return compiled;
         }
 

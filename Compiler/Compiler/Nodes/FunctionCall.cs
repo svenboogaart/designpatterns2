@@ -20,7 +20,7 @@ namespace Compiler.Nodes
 
         public override void Accept(VirtualMachine.NodeVisitor visitor)
         {
-
+            visitor.Visit(this);
         }
     }
 }

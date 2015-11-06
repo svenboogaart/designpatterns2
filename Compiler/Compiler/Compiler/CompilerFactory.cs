@@ -32,6 +32,7 @@ namespace Compiler.Compiler
             compilers.Add(new CompiledIf());
             compilers.Add(new CompiledConstant());
             compilers.Add(new CompiledPrint());
+            compilers.Add(new CompiledUnairyOperator());
             compilers.Add(new CompiledCondition());
             compilers.Add(new CompiledEndStatement());
 

@@ -1,5 +1,5 @@
 ﻿using Compiler.Nodes;
-using Compiler.VirtualMachine.Commands;
+using Compiler.VirtualMachine.Command;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,18 +18,17 @@ namespace Compiler.VirtualMachine
         public VM()
         {
             myCommands = new Dictionary<string,BaseCommand>();
+            myVariables = new Dictionary<string, string>();
             loadCommands();
         }
 
         public void Run(NodeLinkedList list)
         {
             Node currentNode = list.First;
-            NextNodeVisitor visitor = new NextNodeVisitor();
+            NextNodeVisitor visitor = new NextNodeVisitor(this);
 
             while(currentNode != null)
             {
-                // doe iets met de huidige node swa
-                //  Command pattern je weet zelf
                 AbstractFunctionCall actionNode = currentNode as AbstractFunctionCall;
                 if(actionNode != null)
                 {
@@ -45,7 +44,15 @@ namespace Compiler.VirtualMachine
 
         public void SetVariable(string key, string value)
         {
-            myVariables.Add(key, value); 
+            if (!myVariables.ContainsKey(key))
+            {
+                myVariables.Add(key, value); 
+            }
+            else
+            {
+                myVariables[key] = value;
+            }
+           
         }
 
         public string GetVariable(string key)
@@ -59,7 +66,9 @@ namespace Compiler.VirtualMachine
         {
             myCommands.Add("ReturnToVariable", new ReturnToVariableCommand());
             myCommands.Add("Print", new PrintCommand());
-            myCommands.Add("Plus", new PlusCommand());;
+            myCommands.Add("Add", new AddCommand());
+            myCommands.Add("ConstantToReturn", new ConstantToReturnCommand());
+            myCommands.Add("IsIs", new IsIsCommand());
         }
     }
 }
