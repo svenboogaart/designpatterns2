@@ -8,8 +8,7 @@ namespace Compiler.VirtualMachine.Commands
 {
     class PlusCommand : BaseCommand
     {
-        public override void Execute(VirtualMachine vm, IList<string> parameters)
-        {
+     
             public override void Execute(VirtualMachine vm, IList<string> parameterNames) {
                 
             // Function calls bevatten namen van variablen (niet de waarden zelf)
@@ -22,7 +21,5 @@ namespace Compiler.VirtualMachine.Commands
              else
 	        vm.ReturnValue = variable1.Value + variable2.Value;
           }
-    
-        }
     }
 }
