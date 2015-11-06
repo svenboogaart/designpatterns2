@@ -79,9 +79,12 @@ namespace Compiler.Compiler
             _compiledStatement.Add(_body);
             _compiledStatement.Add(jumpBackNode);
             conditionalJumpNode.JumpOnTrue = _body.First;
-            conditionalJumpNode.JumpOnFalse = _compiledStatement.Last;
+            DoNothing doNothing = new DoNothing();
+            _compiledStatement.Add(doNothing);
+            conditionalJumpNode.JumpOnFalse = doNothing;
             jumpBackNode.JumpTo = _compiledStatement.First; 
-            compiled.Add(_compiledStatement);       
+            compiled.Add(_compiledStatement);
+            
             return compiled;
         }
 

@@ -75,10 +75,11 @@ namespace Compiler.Compiler
                     }
                 }
             }
-            Console.WriteLine("if");
             _compiledStatement.Add(_body);
             conditionalJumpNode.JumpOnTrue = _body.First;
-            conditionalJumpNode.JumpOnFalse = _compiledStatement.Last;
+            DoNothing doNothing = new DoNothing();
+            _compiledStatement.Add(doNothing);
+            conditionalJumpNode.JumpOnFalse = doNothing;
             compiled.Add(_compiledStatement);    
             return compiled;
         }
