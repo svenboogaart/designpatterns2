@@ -13,15 +13,18 @@ namespace Compiler.Compiler
         private NodeLinkedList _compiledStatement;
         private NodeLinkedList _condition;
         private NodeLinkedList _body;
+        private ConditionalJump conditionalJumpNode;
+        private bool conditionDone;
+        private Jump jumpBackNode;
 
         public CompiledWhile()
         {
             _compiledStatement = new NodeLinkedList();
             _condition = new NodeLinkedList();
             _body = new NodeLinkedList();
-
-            var conditionalJumpNode = new ConditionalJump();
-            var jumpBackNode = new Jump();
+            conditionalJumpNode = new ConditionalJump();
+            jumpBackNode = new Jump();
+            conditionDone = false;
 
             _compiledStatement.Add(_condition);
             _compiledStatement.Add(conditionalJumpNode);
@@ -62,24 +65,30 @@ namespace Compiler.Compiler
                 }
                 else if (expectation.Level >= whileLevel)
                 {
-                    if (_condition == null) 
+                    if (!conditionDone) 
                     {
                         var compiledCondition = new CompiledCondition();
-                        
                         _condition = compiledCondition.Compile(ref currentToken,_condition);
+                        _compiledStatement.Add(_condition);
+                        _compiledStatement.Add(conditionalJumpNode);
                     }
                     else
                     {
                         while (currentToken.Value.Level > whileLevel) 
                         {
                             var compiledBodyPart = CompilerFactory.Instance.CreateCompiledStatement(currentToken);
-                            
                             _body = compiledBodyPart.Compile(ref currentToken,_body);
-                        };
+                        }
                     }
                 }
             }
             Console.WriteLine("while");
+            _compiledStatement.Add(jumpBackNode);
+            _compiledStatement.Add(_body);
+            conditionalJumpNode.JumpOnTrue = _body.First;
+            conditionalJumpNode.JumpOnFalse = _compiledStatement.Last;
+            jumpBackNode.JumpTo = _compiledStatement.First; 
+            compiled.Add(_compiledStatement);       
             return compiled;
         }
 

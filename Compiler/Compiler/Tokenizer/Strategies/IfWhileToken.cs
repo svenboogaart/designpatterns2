@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Compiler.Tokenizer.Strategies
 {
-    public class IfToken : Strategy
+    public class IfWhileToken : Strategy
     {
         public Token Match(string value, Token lastToken)
         {
@@ -15,7 +15,16 @@ namespace Compiler.Tokenizer.Strategies
                 Token token = null;
                 token = new Token();
                 token.TokenType = TokenType.IfToken;
-                token.Value = "als";
+                token.Value = value;
+                token.Level = Tokenize.level;
+                return token;
+            }
+            else if (value.StartsWith("zolang"))
+            {
+                Token token = null;
+                token = new Token();
+                token.TokenType = TokenType.WhileToken;
+                token.Value = value;
                 token.Level = Tokenize.level;
                 return token;
             }

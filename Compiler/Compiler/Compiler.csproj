@@ -67,7 +67,7 @@
     <Compile Include="Tokenizer\Strategies\ConditionToken.cs" />
     <Compile Include="Tokenizer\Strategies\EndstatementToken.cs" />
     <Compile Include="Tokenizer\Strategies\FunctionToken.cs" />
-    <Compile Include="Tokenizer\Strategies\IfToken.cs" />
+    <Compile Include="Tokenizer\Strategies\IfWhileToken.cs" />
     <Compile Include="Tokenizer\Strategies\NumberToken.cs" />
     <Compile Include="Tokenizer\Strategies\Strategy.cs" />
     <Compile Include="Tokenizer\Strategies\IdentifierToken.cs" />

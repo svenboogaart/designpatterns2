@@ -16,7 +16,7 @@ namespace Compiler.Tokenizer
             tokenStrategy.Add(new AssignToken());
             tokenStrategy.Add(new CodeBlockToken());
             tokenStrategy.Add(new EndstatementToken());
-            tokenStrategy.Add(new IfToken());
+            tokenStrategy.Add(new IfWhileToken());
             tokenStrategy.Add(new NumberToken());
             tokenStrategy.Add(new ConditionToken());
             tokenStrategy.Add(new FunctionToken());
