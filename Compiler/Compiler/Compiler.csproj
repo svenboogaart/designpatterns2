@@ -48,6 +48,7 @@
     <Compile Include="Compiler\CompiledEndStatement.cs" />
     <Compile Include="Compiler\CompiledIf.cs" />
     <Compile Include="Compiler\CompiledPlus.cs" />
+    <Compile Include="Compiler\CompiledPrint.cs" />
     <Compile Include="Compiler\CompiledStatement.cs" />
     <Compile Include="Compiler\Compile.cs" />
     <Compile Include="Compiler\CompiledWhile.cs" />
@@ -81,7 +82,7 @@
     <Compile Include="VirtualMachine\Command\PlusCommand.cs" />
     <Compile Include="VirtualMachine\Command\PrintCommand.cs" />
     <Compile Include="VirtualMachine\Command\ReturnToVariableCommand.cs" />
-    <Compile Include="VirtualMachine\VirtualMachine.cs" />
+    <Compile Include="VirtualMachine\VM.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

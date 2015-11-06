@@ -12,6 +12,12 @@ namespace Compiler.Nodes
         {
             parameters = new string[3] { name, left, right };
         }
+
+        public FunctionCall(string name, string left)
+        {
+            parameters = new string[2] { name, left };
+        }
+
         public override void Accept(VirtualMachine.NodeVisitor visitor)
         {
 

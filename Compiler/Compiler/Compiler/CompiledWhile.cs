@@ -25,16 +25,8 @@ namespace Compiler.Compiler
             conditionalJumpNode = new ConditionalJump();
             jumpBackNode = new Jump();
             conditionDone = false;
-
-            _compiledStatement.Add(_condition);
-            _compiledStatement.Add(conditionalJumpNode);
-            _compiledStatement.Add(_body);
-            _compiledStatement.Add(jumpBackNode);
-
-            jumpBackNode.JumpTo = _compiledStatement.First; 
-            conditionalJumpNode.JumpOnTrue = _body.First;
-            conditionalJumpNode.JumpOnFalse = _compiledStatement.Last;
         }
+
         public override NodeLinkedList Compile(ref LinkedListNode<Token> currentToken, NodeLinkedList compiled)
         {
             int whileLevel = currentToken.Value.Level;
@@ -60,7 +52,8 @@ namespace Compiler.Compiler
                     }
                     else
                     {
-                        currentToken = currentToken.Next;
+                        if (currentToken.Next != null)
+                            currentToken = currentToken.Next;
                     }
                 }
                 else if (expectation.Level >= whileLevel)
@@ -71,6 +64,7 @@ namespace Compiler.Compiler
                         _condition = compiledCondition.Compile(ref currentToken,_condition);
                         _compiledStatement.Add(_condition);
                         _compiledStatement.Add(conditionalJumpNode);
+                        conditionDone = true;
                     }
                     else
                     {
@@ -83,8 +77,9 @@ namespace Compiler.Compiler
                 }
             }
             Console.WriteLine("while");
-            _compiledStatement.Add(jumpBackNode);
+            
             _compiledStatement.Add(_body);
+            _compiledStatement.Add(jumpBackNode);
             conditionalJumpNode.JumpOnTrue = _body.First;
             conditionalJumpNode.JumpOnFalse = _compiledStatement.Last;
             jumpBackNode.JumpTo = _compiledStatement.First; 

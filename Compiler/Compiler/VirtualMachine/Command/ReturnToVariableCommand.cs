@@ -8,7 +8,7 @@ namespace Compiler.VirtualMachine.Commands
 {
     class ReturnToVariableCommand : BaseCommand
     {
-        public override void Execute(VirtualMachine vm, IList<string> parameters)
+        public override void Execute(VM vm, IList<string> parameters)
         {
             //parameters 0 overslaan, dit is de naam van de functie.
             vm.SetVariable(parameters[1], vm.ReturnValue);

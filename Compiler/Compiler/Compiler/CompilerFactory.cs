@@ -31,6 +31,7 @@ namespace Compiler.Compiler
             compilers.Add(new CompiledWhile());
             compilers.Add(new CompiledIf());
             compilers.Add(new CompiledConstant());
+            compilers.Add(new CompiledPrint());
             compilers.Add(new CompiledCondition());
             compilers.Add(new CompiledEndStatement());
 

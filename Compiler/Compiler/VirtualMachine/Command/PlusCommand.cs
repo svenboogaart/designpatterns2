@@ -8,7 +8,7 @@ namespace Compiler.VirtualMachine.Commands
 {
     class PlusCommand : BaseCommand
     {
-        public override void Execute(VirtualMachine vm, IList<string> parameterNames)
+        public override void Execute(VM vm, IList<string> parameterNames)
         {
             //Function calls bevatten namen van variablen (niet de waarden zelf)
             string variable1 = vm.GetVariable(parameterNames[1]);

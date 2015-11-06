@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Compiler.Tokenizer;
 using Compiler.Compiler;
+using Compiler.VirtualMachine;
 
 namespace Compiler
 {
@@ -32,6 +33,9 @@ namespace Compiler
             LinkedList<Token> tokens = tokenizer.Tokenizer(textFromFile);
 
             Compile.compile(tokens);
+
+            VM vm = new VM();
+            vm.Run(Compile.CompiledNodes);
 
             Console.WriteLine("Press any key to exit.");
             System.Console.ReadKey();

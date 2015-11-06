@@ -8,16 +8,14 @@ using System.Threading.Tasks;
 
 namespace Compiler.VirtualMachine
 {
-    public class VirtualMachine
+    public class VM
     {
 
         private Dictionary<string, BaseCommand> myCommands;
         public string ReturnValue;
         public Dictionary<string, string> myVariables;
-
-
        
-        public VirtualMachine()
+        public VM()
         {
             myCommands = new Dictionary<string,BaseCommand>();
             loadCommands();
@@ -32,7 +30,13 @@ namespace Compiler.VirtualMachine
             {
                 // doe iets met de huidige node swa
                 //  Command pattern je weet zelf
+                AbstractFunctionCall actionNode = currentNode as AbstractFunctionCall;
+                if(actionNode != null)
+                {
+                    string name = actionNode.parameters[0];
+                    myCommands[name].Execute(this, actionNode.parameters);
 
+                }
                 // Bepaal de volgende node
                 currentNode.Accept(visitor);
                 currentNode = visitor.NextNode;

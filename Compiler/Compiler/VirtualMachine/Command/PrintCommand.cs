@@ -8,7 +8,7 @@ namespace Compiler.VirtualMachine.Commands
 {
     class PrintCommand : BaseCommand
     {
-        public override void Execute(VirtualMachine vm, IList<string> parameters)
+        public override void Execute(VM vm, IList<string> parameters)
         {
             throw new NotImplementedException();
         }
