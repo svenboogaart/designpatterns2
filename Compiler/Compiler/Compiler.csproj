@@ -66,6 +66,7 @@
     <Compile Include="Tokenizer\Strategies\CodeBlockToken.cs" />
     <Compile Include="Tokenizer\Strategies\ConditionToken.cs" />
     <Compile Include="Tokenizer\Strategies\EndstatementToken.cs" />
+    <Compile Include="Tokenizer\Strategies\FunctionToken.cs" />
     <Compile Include="Tokenizer\Strategies\IfToken.cs" />
     <Compile Include="Tokenizer\Strategies\NumberToken.cs" />
     <Compile Include="Tokenizer\Strategies\Strategy.cs" />
@@ -74,12 +75,12 @@
     <Compile Include="Tokenizer\Token.cs" />
     <Compile Include="Tokenizer\TokenFactory.cs" />
     <Compile Include="Tokenizer\Tokenize.cs" />
-    <Compile Include="VirtualMachine\Commands\BaseCommand.cs" />
-    <Compile Include="VirtualMachine\Commands\PlusCommand.cs" />
-    <Compile Include="VirtualMachine\Commands\PrintCommand.cs" />
-    <Compile Include="VirtualMachine\Commands\ReturnToVariableCommand.cs" />
+    <Compile Include="VirtualMachine\Command\BaseCommand.cs" />
     <Compile Include="VirtualMachine\NextNodeVisitor.cs" />
     <Compile Include="VirtualMachine\NodeVisitor.cs" />
+    <Compile Include="VirtualMachine\Command\PlusCommand.cs" />
+    <Compile Include="VirtualMachine\Command\PrintCommand.cs" />
+    <Compile Include="VirtualMachine\Command\ReturnToVariableCommand.cs" />
     <Compile Include="VirtualMachine\VirtualMachine.cs" />
   </ItemGroup>
   <ItemGroup>

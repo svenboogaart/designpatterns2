@@ -55,6 +55,7 @@ namespace Compiler.Tokenizer
         Empty,
         EndCode,
         StartCode,
-        Any
+        Any,
+        Print
     }
 }

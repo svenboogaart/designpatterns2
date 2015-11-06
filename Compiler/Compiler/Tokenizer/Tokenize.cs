@@ -29,6 +29,7 @@ namespace Compiler.Tokenizer
                     string[] parts = sline.Split(new string[] { " " }, StringSplitOptions.None);
                     foreach (string part in parts)
                     {
+                        part.Trim();
                         Token token;
                         if (tokens.Last != null)
                         {
@@ -76,7 +77,11 @@ namespace Compiler.Tokenizer
                             level++;
                             partnerStack.Push(token);
                         }*/
-                        tokens.AddLast(token);
+                        if (token != null)
+                        {
+                            tokens.AddLast(token);
+                        }
+                        
                     }
                 }
             }

@@ -13,30 +13,28 @@ namespace Compiler.Compiler
         private NodeLinkedList _compiledStatement;
         private NodeLinkedList _condition;
         private NodeLinkedList _body;
+        private bool conditionDone;
 
         public CompiledIf()
         {
             _compiledStatement = new NodeLinkedList();
             _condition = new NodeLinkedList();
             _body = new NodeLinkedList();
-
+            conditionDone = false;
             var conditionalJumpNode = new ConditionalJump();
-            var jumpBackNode = new Jump();
 
             _compiledStatement.Add(_condition);
             _compiledStatement.Add(conditionalJumpNode);
             _compiledStatement.Add(_body);
-            _compiledStatement.Add(jumpBackNode);
 
-            jumpBackNode.JumpTo = _compiledStatement.First; 
             conditionalJumpNode.JumpOnTrue = _body.First;
             conditionalJumpNode.JumpOnFalse = _compiledStatement.Last;
         }
+
         public override NodeLinkedList Compile(ref LinkedListNode<Token> currentToken, NodeLinkedList compiled)
         {
             int ifLevel = currentToken.Value.Level;
             compiled.Add(_compiledStatement);
-
             List<TokenExpectation> expected = new List<TokenExpectation>()
             {
                 new TokenExpectation(ifLevel, TokenType.IfToken), 
@@ -64,11 +62,12 @@ namespace Compiler.Compiler
                 }
                 else if (expectation.Level >= ifLevel)
                 {
-                    if (_condition == null) 
+                    if (!conditionDone) 
                     {
                         var compiledCondition = new CompiledCondition();
                         
                         _condition = compiledCondition.Compile(ref currentToken, _condition);
+                        conditionDone = true;
                     }
                     else
                     {
