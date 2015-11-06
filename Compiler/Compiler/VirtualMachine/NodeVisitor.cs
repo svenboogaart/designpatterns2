@@ -9,6 +9,16 @@ namespace Compiler.VirtualMachine
 {
     public abstract class NodeVisitor
     {
-        public abstract void Visit(Node node);
+        public abstract void Visit(Jump node);
+
+        public abstract void Visit(DoNothing node);
+
+
+        //Zorg ervoor dat hij bij de returnvalue van de virtualmachine kan.
+        public abstract void Visit(ConditionalJump node);
+
+        public abstract void Visit(DirectFunctionCall node);
+
+        public abstract void Visit(FunctionCall node);
     }
 }

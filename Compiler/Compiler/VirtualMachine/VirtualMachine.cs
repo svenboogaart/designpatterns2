@@ -14,10 +14,12 @@ namespace Compiler.VirtualMachine
         private Dictionary<string, BaseCommand> myCommands;
         public string ReturnValue;
         public Dictionary<string, string> myVariables;
-        
 
+
+       
         public VirtualMachine()
         {
+            myCommands = new Dictionary<string,BaseCommand>();
             loadCommands();
         }
 
