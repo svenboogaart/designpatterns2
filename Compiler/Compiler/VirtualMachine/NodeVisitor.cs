@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Compiler.VirtualMachine
 {
-    public class NodeVisitor
+    public abstract class NodeVisitor
     {
-        public abstract void  Visit(Node node);
+        public abstract void Visit(Node node);
     }
 }
