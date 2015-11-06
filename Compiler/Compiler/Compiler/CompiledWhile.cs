@@ -76,8 +76,6 @@ namespace Compiler.Compiler
                     }
                 }
             }
-            Console.WriteLine("while");
-            
             _compiledStatement.Add(_body);
             _compiledStatement.Add(jumpBackNode);
             conditionalJumpNode.JumpOnTrue = _body.First;

@@ -43,7 +43,6 @@ namespace Compiler.Compiler
                     break;
             }
             currentToken = currentToken.Next;
-            Console.WriteLine("condition");
             return compiled;
         }
 
