@@ -44,14 +44,14 @@ namespace Compiler.VirtualMachine
 
         public void SetVariable(string key, string value)
         {
-            if (!myVariables.ContainsKey(key))
-            {
-                myVariables.Add(key, value); 
-            }
-            else
-            {
+            //if (!myVariables.ContainsKey(key))
+            //{
+            //    myVariables.Add(key, value); 
+            //}
+            //else
+            //{
                 myVariables[key] = value;
-            }
+            //}
            
         }
 
